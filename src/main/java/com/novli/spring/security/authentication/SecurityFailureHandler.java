@@ -27,7 +27,7 @@ public class SecurityFailureHandler implements AuthenticationFailureHandler {
         log.info("登录失败");
         response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
         response.setContentType("application/json;charset=UTF-8");
-        response.getWriter().write(objectMapper.writeValueAsString(exception));
+        response.getWriter().write(objectMapper.writeValueAsString(exception.getMessage()));
 
     }
 }
