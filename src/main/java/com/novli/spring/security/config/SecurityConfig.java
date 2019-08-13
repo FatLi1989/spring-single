@@ -46,7 +46,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .failureHandler(securityFailureHandler)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/authentication/require", securityProperties.getBrowser().getLoginPage(), "/code/img")
+                .antMatchers("/authentication/require", securityProperties.getBrowser().getLoginPage(), "/code/img", "/assets/**")
                 .permitAll()
                 .anyRequest()
                 .authenticated()
