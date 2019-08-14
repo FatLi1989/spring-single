@@ -20,15 +20,15 @@ body {
 }
 
 
-.page-container .validate {
+.page-container .account {
     display: flex;
 }
 
-.page-container .validate input{
+.page-container .account input{
     width: 200px;
 }
 
-.page-container .validate img {
+.page-container .account img {
     height: 42px;
     width: 100px;
     margin: 25px 0px 0px 5px;
@@ -36,6 +36,32 @@ body {
     border-radius: 5px;
 }
 
+
+.page-container .mobile {
+    display: flex;
+}
+
+.page-container .mobile .mobile-fornt{
+    width: 50px;
+}
+.page-container .mobile .mobile-context{
+    margin-left: 20px;
+}
+
+.page-container .mobile-validate {
+    display: flex;
+    border-style:solid;
+    border:10px;
+    border-color:black;
+}
+.page-container .mobile-validate button{
+    width: 120px;
+    height: 44px;
+    margin-left: 10px;
+    background:rgba(255, 255, 255, 0);
+    border: 1px solid #fff;
+
+}
 
 h1 {
     font-size: 30px;
@@ -46,7 +72,7 @@ h1 {
 form {
     position: relative;
     width: 305px;
-    margin: 15px auto 0 auto;
+    margin: 3px auto 0 auto;
     text-align: center;
 }
 
@@ -204,5 +230,25 @@ button:active {
     background-position: center bottom;
 }
 
+a:hover {
+    border-bottom: 2px;
+    border-bottom-style:solid;
+    border-bottom-color:red;
+}
 
-
+.login-block {
+    display: flex;
+    position:relative;
+    text-align: center;
+    width:305px;
+    margin:5px auto 0px auto;
+    color:black;
+    justify-content:space-around
+}
+.login-block a{
+    font-family: 'PT Sans', Helvetica, Arial, sans-serif;
+    text-decoration: none;
+    color: #fff;
+    display:inline-block;
+    padding: 5px 40px
+}

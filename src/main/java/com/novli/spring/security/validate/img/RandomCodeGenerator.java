@@ -1,4 +1,4 @@
-package com.novli.spring.security.util.code.img;
+package com.novli.spring.security.validate.img;
 
 import com.novli.spring.security.model.dto.ImageCode;
 import lombok.AllArgsConstructor;

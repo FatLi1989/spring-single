@@ -1,10 +1,10 @@
 package com.novli.spring.security.filter;
 
 import com.novli.spring.security.authentication.SecurityFailureHandler;
-import com.novli.spring.security.controller.ValidateCodeController;
 import com.novli.spring.security.exception.ValidateCodeException;
 import com.novli.spring.security.model.dto.ImageCode;
 import com.novli.spring.security.properties.SecurityProperties;
+import com.novli.spring.security.validate.ValidateCodeProcessor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.InitializingBean;
@@ -79,7 +79,7 @@ public class ValidateCodeFilter extends OncePerRequestFilter implements Initiali
     }
 
     private void validateCode(ServletWebRequest servletWebRequest) throws ServletRequestBindingException {
-        ImageCode codeInSession = (ImageCode) sessionStrategy.getAttribute(servletWebRequest, ValidateCodeController.SESSION_KEY);
+        ImageCode codeInSession = (ImageCode) sessionStrategy.getAttribute(servletWebRequest, ValidateCodeProcessor.SESSION_KEY);
         String codeInRequest = ServletRequestUtils.getStringParameter(servletWebRequest.getRequest(), "imageCode");
 
         if (StringUtils.isBlank(codeInRequest)) {
@@ -89,12 +89,12 @@ public class ValidateCodeFilter extends OncePerRequestFilter implements Initiali
             throw new ValidateCodeException("验证码不存在！");
         }
         if (codeInSession.isExpire()) {
-            sessionStrategy.removeAttribute(servletWebRequest, ValidateCodeController.SESSION_KEY);
+            sessionStrategy.removeAttribute(servletWebRequest, ValidateCodeProcessor.SESSION_KEY);
             throw new ValidateCodeException("验证码已过期！");
         }
         if (!StringUtils.equalsIgnoreCase(codeInSession.getCode(), codeInRequest)) {
             throw new ValidateCodeException("验证码不正确！");
         }
-        sessionStrategy.removeAttribute(servletWebRequest, ValidateCodeController.SESSION_KEY);
+        sessionStrategy.removeAttribute(servletWebRequest, ValidateCodeProcessor.SESSION_KEY);
     }
 }

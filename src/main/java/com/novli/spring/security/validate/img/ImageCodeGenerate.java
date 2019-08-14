@@ -1,7 +1,8 @@
-package com.novli.spring.security.validate;
+package com.novli.spring.security.validate.img;
 
 import com.novli.spring.security.model.dto.ImageCode;
 import com.novli.spring.security.properties.SecurityProperties;
+import com.novli.spring.security.validate.ValidateCodeGenerate;
 import org.springframework.web.bind.ServletRequestUtils;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,7 +22,7 @@ public class ImageCodeGenerate implements ValidateCodeGenerate {
     public static final String VERIFY_CODES = "1234567890abcdefghjklmnpqrstuvwxyz";
 
     @Override
-    public ImageCode createImage(HttpServletRequest request) {
+    public ImageCode generate(HttpServletRequest request) {
         //生成图片宽度
         int width = ServletRequestUtils.getIntParameter(request, "width", securityProperties.getCode().getImage().getWidth());
         //生成图片高度

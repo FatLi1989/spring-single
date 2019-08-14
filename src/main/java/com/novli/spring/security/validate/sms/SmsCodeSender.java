@@ -1,4 +1,4 @@
-package com.novli.spring.security.util.code.sms;
+package com.novli.spring.security.validate.sms;
 
 public interface SmsCodeSender {
 
