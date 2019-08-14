@@ -5,5 +5,5 @@ spring:
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.jdbc.Driver
     username: root
-    password: root
-    url: jdbc:mysql://47.75.217.205:3306/live_tool?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true
+    password: lyp19891117
+    url: jdbc:mysql://106.12.137.47:3306/security?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true

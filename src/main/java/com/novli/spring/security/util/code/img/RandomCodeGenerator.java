@@ -1,10 +1,9 @@
 package com.novli.spring.security.util.code.img;
 
-import com.novli.spring.security.model.dto.CodeImage;
+import com.novli.spring.security.model.dto.ImageCode;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import javax.servlet.http.HttpServletRequest;
 import java.awt.*;
@@ -65,7 +64,7 @@ public class RandomCodeGenerator {
         return new String(cs).toUpperCase();
     }
 
-    public  CodeImage generator(HttpServletRequest request) throws IOException {
+    public ImageCode generator(HttpServletRequest request) throws IOException {
         int width = length * (fontSize + 2) + 10;
         int height = fontSize + 10;
         //创建一个缓存图片对象
@@ -98,7 +97,7 @@ public class RandomCodeGenerator {
             g.drawString(randomCode.substring(i, i+1), 8 + fontSize * i, height / 2 + fontSize / 2);
         }
         //输出
-        return new CodeImage(image, randomCode, 60);
+        return new ImageCode(image, randomCode, 60);
 
     }
 

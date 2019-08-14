@@ -11,7 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 @Slf4j
-@Component
+@Component(value = "myUserDetail")
 public class UserDetail implements UserDetailsService {
 
     @Autowired
