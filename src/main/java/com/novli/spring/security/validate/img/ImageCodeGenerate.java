@@ -10,7 +10,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.Random;
 
-public class ImageCodeGenerate implements ValidateCodeGenerate {
+public class ImageCodeGenerate implements ValidateCodeGenerate<ImageCode> {
 
 
     public ImageCodeGenerate(SecurityProperties securityProperties) {

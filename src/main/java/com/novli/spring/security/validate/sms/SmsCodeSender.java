@@ -1,7 +1,7 @@
 package com.novli.spring.security.validate.sms;
 
-public interface SmsCodeSender {
+public interface SmsCodeSender{
 
 
-    void send(String mobile, String code);
+    void sendLogin(String mobile, String code);
 }

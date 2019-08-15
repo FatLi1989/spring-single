@@ -22,9 +22,6 @@ import java.util.Set;
 @AllArgsConstructor
 public class RandomCodeGenerator {
 
-
-
-
     private static final char[] CHARS = "abcdefghijkmnpqrstovwxyz0123456789".toCharArray();
     private int length;
     private int fontSize = 14;

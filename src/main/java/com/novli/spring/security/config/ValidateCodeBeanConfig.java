@@ -3,9 +3,7 @@ package com.novli.spring.security.config;
 import com.novli.spring.security.properties.SecurityProperties;
 import com.novli.spring.security.validate.ValidateCodeGenerate;
 import com.novli.spring.security.validate.img.ImageCodeGenerate;
-import com.novli.spring.security.validate.sms.DefaultSmsCodeSender;
 import com.novli.spring.security.validate.sms.SmsCodeGenerate;
-import com.novli.spring.security.validate.sms.SmsCodeSender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
@@ -34,10 +32,18 @@ public class ValidateCodeBeanConfig {
         return validateCodeGenerate;
     }
 
-    @Bean
-    @ConditionalOnMissingBean(SmsCodeSender.class)
-    public SmsCodeSender smsCodeSender() {
-        return new DefaultSmsCodeSender();
+
+ /*   @Bean
+    @ConditionalOnMissingBean(name = "qiNiuSmsCodeSender")
+    public SmsCodeSender qiNiuSmsCodeSender() {
+        SmsCodeSender smsCodeSender = new QiNiuSmsCodeSender(securityProperties);
+        return smsCodeSender;
     }
 
+    @Bean
+    @ConditionalOnMissingBean(name = "tencentSmsCodeSender")
+    public SmsCodeSender tencentSmsCodeSender() {
+        SmsCodeSender smsCodeSender = new TencentSmsCodeSender(securityProperties);
+        return smsCodeSender;
+    }*/
 }

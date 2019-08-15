@@ -1,16 +1,24 @@
 package com.novli.spring.security.properties;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
-@Data
+@ToString
 public class ImageCodeProperties extends SmsCodeProperties {
 
     public ImageCodeProperties() {
         setLength(4);
     }
+
+    @Setter
+    @Getter
     private int width;
 
+    @Setter
+    @Getter
     private int height;
+
 
 
 

@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
  * @date 2019年08月14日 10:50
  */
 @Data
-public class SmsCodeGenerate implements ValidateCodeGenerate {
+public class SmsCodeGenerate implements ValidateCodeGenerate<ValidateCode> {
 
     private SecurityProperties securityProperties;
 

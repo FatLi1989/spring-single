@@ -1,12 +1,20 @@
 package com.novli.spring.security.properties;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
-@Data
+@ToString
 public class ValidateCodeProperties {
 
+    @Setter
+    @Getter
     private ImageCodeProperties image = new ImageCodeProperties();
 
+    @Setter
+    @Getter
     private SmsCodeProperties sms = new SmsCodeProperties();
 
+    public ValidateCodeProperties() {
+    }
 }
