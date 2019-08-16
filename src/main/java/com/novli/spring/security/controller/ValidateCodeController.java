@@ -2,8 +2,8 @@ package com.novli.spring.security.controller;
 
 import com.novli.spring.security.validate.ValidateCodeProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.ServletWebRequest;
 
@@ -22,7 +22,7 @@ public class ValidateCodeController {
     private Map<String, ValidateCodeProcessor> validateCodeProcessors;
 
 
-    @GetMapping("/code/{type}")
+    @PostMapping("/code/{type}")
     public void validateImgCode(HttpServletRequest request, HttpServletResponse response, @PathVariable("type") String type) throws Exception {
         //根据不同类型调用验证码处理方式
         String name = type.toLowerCase() + ValidateCodeProcessor.class.getSimpleName();
