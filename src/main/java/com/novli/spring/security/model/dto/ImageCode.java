@@ -19,7 +19,5 @@ public class ImageCode extends ValidateCode{
         this.bufferedImage = bufferedImage;
     }
 
-    public boolean isExpire() {
-        return LocalDateTime.now().isAfter(super.expireTime);
-    }
+
 }

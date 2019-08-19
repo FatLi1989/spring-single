@@ -22,6 +22,10 @@ public class UserDetail implements UserDetailsService {
 
         log.info("password: {}", passwordEncoder.encode("123456"));
 
-        return new User(s, passwordEncoder.encode("123456"), AuthorityUtils.commaSeparatedStringToAuthorityList("admin"));
+
+        String password = passwordEncoder.encode("123456");
+
+
+        return new User(s, password, AuthorityUtils.commaSeparatedStringToAuthorityList("admin"));
     }
 }

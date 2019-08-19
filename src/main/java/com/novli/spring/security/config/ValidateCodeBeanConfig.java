@@ -31,19 +31,4 @@ public class ValidateCodeBeanConfig {
         ValidateCodeGenerate validateCodeGenerate = new SmsCodeGenerate(securityProperties);
         return validateCodeGenerate;
     }
-
-
- /*   @Bean
-    @ConditionalOnMissingBean(name = "qiNiuSmsCodeSender")
-    public SmsCodeSender qiNiuSmsCodeSender() {
-        SmsCodeSender smsCodeSender = new QiNiuSmsCodeSender(securityProperties);
-        return smsCodeSender;
-    }
-
-    @Bean
-    @ConditionalOnMissingBean(name = "tencentSmsCodeSender")
-    public SmsCodeSender tencentSmsCodeSender() {
-        SmsCodeSender smsCodeSender = new TencentSmsCodeSender(securityProperties);
-        return smsCodeSender;
-    }*/
 }

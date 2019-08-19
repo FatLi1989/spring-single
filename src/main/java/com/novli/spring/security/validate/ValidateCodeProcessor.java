@@ -13,8 +13,9 @@ import java.io.IOException;
  **/
 public interface ValidateCodeProcessor {
 
-    public static final String SESSION_KEY = "SESSION_KEY_IMAGE_CODE";
+    public static final String SESSION_IMAGE_KEY = "SESSION_KEY_IMAGE_CODE";
 
+    public static final String SESSION_SMS_KEY = "SESSION_KEY_IMAGE_CODE";
     /**
      * 生成验证码
      **/

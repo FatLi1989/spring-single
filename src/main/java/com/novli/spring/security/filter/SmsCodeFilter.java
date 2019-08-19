@@ -2,7 +2,7 @@ package com.novli.spring.security.filter;
 
 import com.novli.spring.security.authentication.SecurityFailureHandler;
 import com.novli.spring.security.exception.ValidateCodeException;
-import com.novli.spring.security.model.dto.ImageCode;
+import com.novli.spring.security.model.dto.ValidateCode;
 import com.novli.spring.security.properties.SecurityProperties;
 import com.novli.spring.security.validate.ValidateCodeProcessor;
 import lombok.extern.slf4j.Slf4j;
@@ -33,7 +33,7 @@ import java.util.stream.Stream;
  */
 @Slf4j
 @Component
-public class ValidateCodeFilter extends OncePerRequestFilter implements InitializingBean {
+public class SmsCodeFilter extends OncePerRequestFilter implements InitializingBean {
 
     @Autowired
     SecurityFailureHandler securityFailureHandler;
@@ -53,7 +53,7 @@ public class ValidateCodeFilter extends OncePerRequestFilter implements Initiali
         //加载全部配置文件中需要拦截校验的url,并放到集合中
         String[] configUrls = StringUtils.split(securityProperties.getCode().getImage().getUrl(), ",");
         Stream.of(configUrls).forEach(t -> urls.add(t));
-        urls.add("/authentication/form");
+        urls.add("/authentication/mobile");
     }
 
     @Override
@@ -79,22 +79,22 @@ public class ValidateCodeFilter extends OncePerRequestFilter implements Initiali
     }
 
     private void validateCode(ServletWebRequest servletWebRequest) throws ServletRequestBindingException {
-        ImageCode codeInSession = (ImageCode) sessionStrategy.getAttribute(servletWebRequest, ValidateCodeProcessor.SESSION_IMAGE_KEY);
-        String codeInRequest = ServletRequestUtils.getStringParameter(servletWebRequest.getRequest(), "imageCode");
+        ValidateCode validateCode = (ValidateCode) sessionStrategy.getAttribute(servletWebRequest, ValidateCodeProcessor.SESSION_SMS_KEY);
+        String codeInRequest = ServletRequestUtils.getStringParameter(servletWebRequest.getRequest(), "smsCode");
 
         if (StringUtils.isBlank(codeInRequest)) {
             throw new ValidateCodeException("验证码不能为空！");
         }
-        if (codeInSession == null) {
+        if (validateCode == null) {
             throw new ValidateCodeException("验证码不存在！");
         }
-        if (codeInSession.isExpire()) {
-            sessionStrategy.removeAttribute(servletWebRequest, ValidateCodeProcessor.SESSION_IMAGE_KEY);
+        if (validateCode.isExpire()) {
+            sessionStrategy.removeAttribute(servletWebRequest, ValidateCodeProcessor.SESSION_SMS_KEY);
             throw new ValidateCodeException("验证码已过期！");
         }
-        if (!StringUtils.equalsIgnoreCase(codeInSession.getCode(), codeInRequest)) {
+        if (!StringUtils.equalsIgnoreCase(validateCode.getCode(), codeInRequest)) {
             throw new ValidateCodeException("验证码不正确！");
         }
-        sessionStrategy.removeAttribute(servletWebRequest, ValidateCodeProcessor.SESSION_IMAGE_KEY);
+        sessionStrategy.removeAttribute(servletWebRequest, ValidateCodeProcessor.SESSION_SMS_KEY);
     }
 }

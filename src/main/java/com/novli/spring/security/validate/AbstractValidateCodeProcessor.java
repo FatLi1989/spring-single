@@ -16,11 +16,6 @@ import java.util.Map;
  */
 public abstract class AbstractValidateCodeProcessor<C extends ValidateCode> implements ValidateCodeProcessor {
 
-    /**
-     * 操作session的工具类
-     */
-    private SessionStrategy sessionStrategy = new HttpSessionSessionStrategy();
-
     @Autowired
     private Map<String, ValidateCodeGenerate> validateCodeGenerates;
 
@@ -57,10 +52,8 @@ public abstract class AbstractValidateCodeProcessor<C extends ValidateCode> impl
      **/
     protected abstract void send(ServletWebRequest request, C validateCode) throws Exception;
 
+    protected abstract void save(ServletWebRequest request, C validateCode);
 
-    private void save(ServletWebRequest request, C validateCode) {
-        sessionStrategy.setAttribute(new ServletRequestAttributes(request.getRequest()), SESSION_KEY, validateCode);
-    }
 
 
     @Override

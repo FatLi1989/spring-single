@@ -18,4 +18,8 @@ public class ValidateCode {
         this.expireTime = LocalDateTime.now().plusSeconds(expireTime);
     }
 
+    public boolean isExpire() {
+        return LocalDateTime.now().isAfter(this.expireTime);
+    }
+
 }

@@ -34,6 +34,7 @@ public class Authentication {
     @ResponseStatus(code = HttpStatus.UNAUTHORIZED)
     public SimpleResponse requireAuthentication(HttpServletRequest request, HttpServletResponse response) {
         //request请求会存放到requestCache中
+
         SavedRequest savedRequest = requestCache.getRequest(request, response);
         if (savedRequest != null) {
             //获取请求目标地址

@@ -2,6 +2,7 @@ package com.novli.spring.security.config;
 
 import com.novli.spring.security.authentication.SecurityFailureHandler;
 import com.novli.spring.security.authentication.SecuritySuccessHandler;
+import com.novli.spring.security.filter.SmsCodeFilter;
 import com.novli.spring.security.filter.ValidateCodeFilter;
 import com.novli.spring.security.properties.SecurityProperties;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +34,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private SecurityFailureHandler securityFailureHandler;
 
     @Autowired
-    ValidateCodeFilter validateCodeFilter;
+    private ValidateCodeFilter validateCodeFilter;
+
+    @Autowired
+    private SmsCodeFilter smsCodeFilter;
+
 
     @Autowired
     private DataSource dataSource;
@@ -41,6 +46,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     @Qualifier(value = "myUserDetail")
     private UserDetailsService userDetailsService;
+
+
+    @Autowired
+    private SmsCodeAuthenticationSecurityConfig smsCodeAuthenticationSecurityConfig;
 
     @Bean
     public PersistentTokenRepository persistentTokenRepository() {
@@ -59,6 +68,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http
+                .addFilterBefore(smsCodeFilter, UsernamePasswordAuthenticationFilter.class)
                 .addFilterBefore(validateCodeFilter, UsernamePasswordAuthenticationFilter.class)
                     .formLogin()
                     .loginPage("/authentication/require")
@@ -72,11 +82,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .userDetailsService(userDetailsService)
                 .and()
                     .authorizeRequests()
-                    .antMatchers("/authentication/require", securityProperties.getBrowser().getLoginPage(), "/code/*", "/assets/**")
+                    .antMatchers("/authentication/require", "/authentication/mobile", securityProperties.getBrowser().getLoginPage(), "/code/*", "/assets/**")
                     .permitAll()
                     .anyRequest()
                     .authenticated()
                 .and()
-                .csrf().disable();
+                .csrf().disable()
+                .apply(smsCodeAuthenticationSecurityConfig);
     }
 }
